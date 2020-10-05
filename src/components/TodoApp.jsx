@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './../App.css';
+import { DeleteBtn } from './../images/circle-cropped.png';
 
 const TodoApp = () => {
     // State 
@@ -22,10 +23,20 @@ const TodoApp = () => {
         setNoTasks(false);
     }
 
-    // Delete All
+    // Delete All Tasks
     const handleDeleteAll = () => {
         setTasks([]);
         setNoTasks(true);
+    }
+
+    // Delete Task
+    const handleDelete = (taskToRemove) => {
+        if (tasks.length > 1) {
+            setTasks(tasks.filter((task) => task !== taskToRemove));
+        } else {
+            setTasks(tasks.filter((task) => task !== taskToRemove));
+            setNoTasks(true);
+        }
     }
 
 
@@ -40,7 +51,7 @@ const TodoApp = () => {
                         <h4>Enter Task to be added</h4>
                         <input className='text-input' type="text" value={input} name='task' onChange={handleInputChange} autoFocus required /><br />
                         <input className='button' type='button' onClick={() => setTaskToBeAdded(false)} value='Back to the list' />
-                        <input className='button' type='submit' value='Add' />
+                        <input className='button green' type='submit' value='Add +' />
 
 
                     </div>
@@ -49,13 +60,13 @@ const TodoApp = () => {
                 :
                 <div className='tasks-container'>
                     <h2>Tasks</h2>
-                    <button className='button' onClick={() => setTaskToBeAdded(true)}>Add task</button>
+                    <button className='button green' onClick={() => setTaskToBeAdded(true)}>Add task +</button>
                     <hr />
                     <div className='tasks'>
                         {noTasks
                             ?
                             <div className='no-tasks'>
-                                <h4 >Looks like there are no tasks !! <br /> <span className='add'>(To add click "Add Task")</span></h4>
+                                <h4 >  <span className='add'>(To add click "Add Task")</span></h4>
                             </div>
 
 
@@ -63,7 +74,7 @@ const TodoApp = () => {
                             <ol>
                                 {tasks.map((task, index) => (
                                     <div className='task' key={index}>
-                                        <li >{task}</li><button>delete</button>
+                                        <li id={index}>{task}</li><div onClick={() => handleDelete(task)}></div>
 
                                     </div>
                                 ))}
@@ -72,7 +83,7 @@ const TodoApp = () => {
                         }
 
                     </div>
-                    {noTasks ? <></> : <button className='button bottom' onClick={() => handleDeleteAll()}>Delete All</button>}
+                    {noTasks ? <></> : <button className='button bottom red' onClick={() => handleDeleteAll()}>Delete All</button>}
 
                 </div>
             }

@@ -72,6 +72,24 @@ body {
 
 .task {
   min-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.task > div {
+  display: inline-block;
+  width: 30px;
+  cursor: pointer;
+  height: 30px;
+  background-size: cover;
+  background-color: rgba(173, 13, 13, 0.692);
+  border-radius: 80%;
+  background-image: url("./images/cross3.svg");
+}
+
+.task > div:hover {
+  background-color: rgb(243, 22, 22);
 }
 
 .no-tasks {
@@ -147,5 +165,13 @@ body {
 
 .button:hover {
   background: rgb(0, 0, 0);
+}
+
+.red:hover {
+  background-color: rgba(224, 20, 20, 0.904) !important;
+}
+
+.green:hover {
+  background-color: rgba(0, 128, 0, 0.863) !important;
 }
 /** Input Container end **/
