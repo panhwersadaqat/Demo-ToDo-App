@@ -22,6 +22,12 @@ const TodoApp = () => {
         setNoTasks(false);
     }
 
+    // Delete All
+    const handleDeleteAll = () => {
+        setTasks([]);
+        setNoTasks(true);
+    }
+
 
     return (
         <div className='todo-container'>
@@ -33,7 +39,10 @@ const TodoApp = () => {
                     <div className='input-container'>
                         <h4>Enter Task to be added</h4>
                         <input className='text-input' type="text" value={input} name='task' onChange={handleInputChange} autoFocus required /><br />
-                        <input className='button' type='submit' />
+                        <input className='button' type='button' onClick={() => setTaskToBeAdded(false)} value='Back to the list' />
+                        <input className='button' type='submit' value='Add' />
+
+
                     </div>
                 </form>
 
@@ -53,13 +62,18 @@ const TodoApp = () => {
                             :
                             <ol>
                                 {tasks.map((task, index) => (
-                                    <li key={index}>{task}</li>
+                                    <div className='task' key={index}>
+                                        <li >{task}</li><button>delete</button>
+
+                                    </div>
                                 ))}
 
                             </ol>
                         }
 
                     </div>
+                    {noTasks ? <></> : <button className='button bottom' onClick={() => handleDeleteAll()}>Delete All</button>}
+
                 </div>
             }
 
